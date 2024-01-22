@@ -8,8 +8,28 @@
         <title>tictactoe-app</title>
     </head>
     <body>
-        <noscript>
-          This app requires JavaScript enabled...:)
-        </noscript>
+        <div class="gameboard">
+            <div id="board">
+                <div class="cell" onclick="game.move(0, 0)"></div>
+                <div class="cell" onclick="game.move(0, 1)"></div>
+                <div class="cell" onclick="game.move(0, 2)"></div>
+                <div class="cell" onclick="game.move(1, 0)"></div>
+                <div class="cell" onclick="game.move(1, 1)"></div>
+                <div class="cell" onclick="game.move(1, 2)"></div>
+                <div class="cell" onclick="game.move(2, 0)"></div>
+                <div class="cell" onclick="game.move(2, 1)"></div>
+                <div class="cell" onclick="game.move(2, 2)"></div>
+            </div>
+        </div>
+        <div class="huds-and-btns">
+            <button class="start-game" onclick="startGame()" type="submit">
+                <div class="text">
+                    Start Game
+                    <div class="huds"></div>
+                </div>
+            </button>
+        </div>
+
+        <noscript> This app requires JavaScript enabled...:) </noscript>
     </body>
 </html>
