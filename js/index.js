@@ -15,7 +15,7 @@ class TicTacToe {
         if (this.tie || this.win) return;
         if (this.isValidMove(row, col)) {
             this.makeMove(row, col);
-            this.updateBoard();
+            this.updateUI();
 
             if (this.checkWinner()) {
                 this.displayBoard();
@@ -80,7 +80,7 @@ class TicTacToe {
         this.board[row][col] = this.currentPlayer;
     }
     // updating html gameBoard
-    updateBoard() {
+    updateUI() {
         let boardIndex = -1;
         const board = document.querySelectorAll(".cell");
         const boardArr = this.board.flat();
