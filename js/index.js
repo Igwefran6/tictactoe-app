@@ -6,6 +6,11 @@ class TicTacToe {
         this.tie = false;
         this.win = false;
         this.initUI();
+        this.winLoss = {
+            playerXwins: 0,
+            playerOwins: 0,
+            ties: 0
+        };
     }
     // instantiate 3x3/two dimensional board array
     initBoard() {
@@ -26,6 +31,10 @@ class TicTacToe {
             setState(playAgainBtn, "auto", 1);
             setState(startGameBtn, "none", 0.5);
         });
+
+        playAgainBtn.addEventListener("click", () => {
+            this.playAgain();
+        });
         function setState(element, pointerEventsValue, opacity) {
             element.style.opacity = opacity;
             element.style.pointerEvents = pointerEventsValue;
@@ -40,6 +49,19 @@ class TicTacToe {
             }
         });
     }
+
+    playAgain() {
+        this.board.forEach(row =>
+            row.forEach((element, index) => {
+                row[index] = " ";
+            })
+        );
+        this.tie = false;
+        this.win = false;
+        this.updateUI();
+        this.display(this.currentPlayer);
+    }
+
     //make move method, the engine of the game
     move(row, col) {
         if (this.tie || this.win) return;
@@ -51,18 +73,29 @@ class TicTacToe {
                 this.displayBoard();
                 console.log(`Player ${this.currentPlayer} wins!`);
                 this.win = true;
+
+                if (this.currentPlayer === "X") {
+                    this.winLoss.playerXwins++;
+                } else {
+                    this.winLoss.playerOwins++;
+                }
+                this.winsAndLoss();
+                this.switchPlayers();
+                this.displayBoard();
+                return;
             }
 
             if (this.isTie()) {
                 this.displayBoard();
                 console.log("It's a tie!");
+                this.winLoss.ties++;
                 this.tie = true;
+                this.winsAndLoss();
             }
-
-            this.switchPlayers();
         } else {
             console.log("Cell already taken. Try again.");
         }
+        this.switchPlayers();
         this.displayBoard();
     }
     /* console version that I commented out as told by odin project curriculum.
@@ -159,6 +192,30 @@ class TicTacToe {
 
     switchPlayers() {
         this.currentPlayer = this.currentPlayer === "X" ? "O" : "X";
+        this.display(this.currentPlayer);
+    }
+
+    display(currentPlayer) {
+        let display = document.querySelector(".display");
+
+        if (this.tie || this.win) {
+            if (this.win) {
+                let winner = currentPlayer === "X" ? "O" : "X";
+                display.textContent = `Player ${winner} won this round`;
+            } else {
+                display.textContent = `It's a tie`;
+            }
+        } else {
+            display.textContent = `Turn: Player ${currentPlayer}`;
+        }
+    }
+    winsAndLoss() {
+        document.querySelector(".x-wins").textContent = `X score:
+      ${this.winLoss.playerXwins}`;
+        document.querySelector(".o-wins").textContent = `O score:
+      ${this.winLoss.playerOwins}`;
+        document.querySelector(".ties").textContent = `Ties:
+      ${this.winLoss.ties}`;
     }
 }
 
