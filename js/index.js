@@ -5,10 +5,40 @@ class TicTacToe {
         this.board = this.initBoard();
         this.tie = false;
         this.win = false;
+        this.initUI();
     }
     // instantiate 3x3/two dimensional board array
     initBoard() {
         return Array.from({ length: 3 }, () => Array(3).fill(" "));
+    }
+
+    initUI() {
+        let refreshPage = document.querySelector(".refresh");
+        let startGameBtn = document.querySelector(".start-game");
+        let playAgainBtn = document.querySelector(".play-again");
+        let gameBoard = document.querySelector(".gameboard");
+
+        setState(playAgainBtn, "none", 0.5);
+        setState(gameBoard, "none", 0.5);
+
+        startGameBtn.addEventListener("click", () => {
+            setState(gameBoard, "auto", 1);
+            setState(playAgainBtn, "auto", 1);
+            setState(startGameBtn, "none", 0.5);
+        });
+        function setState(element, pointerEventsValue, opacity) {
+            element.style.opacity = opacity;
+            element.style.pointerEvents = pointerEventsValue;
+        }
+        refreshPage.addEventListener("click", () => {
+            if (
+                confirm(
+                    `Do you really want to start a fresh game? \nNote: Every data will be lost?`
+                )
+            ) {
+                location.reload();
+            }
+        });
     }
     //make move method, the engine of the game
     move(row, col) {
