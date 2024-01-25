@@ -109,18 +109,31 @@
     cursor: not-allowed;
 }
 
-.wins-and-ties{
-  position: fixed;
-  top: 2px;
-  left: 0;
+.wins-and-ties {
+    position: fixed;
+    top: 2px;
+    left: 0;
 }
 
+.wins-and-ties > span {
+    margin: 2px;
+    font-size: 0.9rem;
+    border: 1px solid grey;
+    padding: 2px 8px;
+    opacity: 0.8;
+    border-radius: 5px;
+}
 
-.wins-and-ties > span{
-  margin: 2px;
-  font-size: .9rem;
-  border: 1px solid grey;
-  padding: 2px 8px;
-  opacity: .8;
-  border-radius: 5px;
+.pop-up {
+  display: none;
+    position: fixed;
+    bottom: 100px;
+    right: 50%;
+    transform: translate(50%, 50%);
+    border: 1px solid grey;
+    padding: 4px 10px;
+    border-radius: 5px;
+    background: mediumaquamarine;
+    color: rgba(0, 0, 0, 0.5);
+    font-weight: bold;
 }

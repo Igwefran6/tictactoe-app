@@ -221,3 +221,12 @@ class TicTacToe {
 
 // Create an instance of TicTacToe
 const game = new TicTacToe();
+let popUp = document.querySelector(".pop-up");
+
+//
+setTimeout(function () {
+    popUp.style.display = "block";
+    setTimeout(function () {
+        popUp.style.display = "none";
+    }, 4000);
+}, 1000);
